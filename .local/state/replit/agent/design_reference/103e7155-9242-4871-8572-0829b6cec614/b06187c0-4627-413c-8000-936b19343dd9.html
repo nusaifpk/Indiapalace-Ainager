@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Company Assistant - Dynamic HTML Responses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#64748b',
+                        accent: '#10b981',
+                    }
+                }
+            }
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 font-inter">
+    <!-- @COMPONENT: MainLayout -->
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <!-- @COMPONENT: Header -->
+        <header class="bg-white border-b border-slate-200 px-6 py-4 flex-shrink-0">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-robot text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-semibold text-slate-800">AI Company Assistant</h1>
+                        <p class="text-sm text-slate-500">Dynamic HTML responses powered by AI</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2 bg-accent/10 px-3 py-1.5 rounded-full">
+                        <div class="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
+                        <span class="text-sm font-medium text-accent">Online</span>
+                    </div>
+                    <button class="p-2 text-slate-400 hover:text-slate-600 transition-colors">
+                        <i class="fas fa-cog text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <!-- @END_COMPONENT: Header -->
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col lg:flex-row max-w-7xl mx-auto w-full">
+            <!-- HTML Response Preview Area -->
+            <!-- @COMPONENT: HTMLPreviewArea -->
+            <div class="flex-1 lg:border-r border-slate-200 bg-white">
+                <div class="h-full flex flex-col">
+                    <!-- Preview Header -->
+                    <div class="border-b border-slate-200 px-6 py-4 bg-slate-50">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-lg font-semibold text-slate-800">Live Response Preview</h2>
+                            <div class="flex items-center space-x-2 text-sm text-slate-500">
+                                <i class="fas fa-clock"></i>
+                                <span data-bind="lastUpdated">Last updated: 2:34 PM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preview Content -->
+                    <div class="flex-1 overflow-auto">
+                        <!-- @STATE: htmlContent:string = "" -->
+                        <!-- @FUNCTIONALITY: This area should render sanitized HTML responses from AI -->
+                        <div id="html-preview-container" class="p-6 min-h-full">
+                            <!-- Sample HTML Response Content -->
+                            <div data-mock="true" class="space-y-6">
+                                <!-- Sample Company Product Showcase -->
+                                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
+                                    <h3 class="text-2xl font-bold text-slate-800 mb-4">Our Premium Cloud Solutions</h3>
+                                    <div class="grid md:grid-cols-2 gap-6">
+                                        <div>
+                                            <!-- High-tech data center with servers and blue lighting -->
+                                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" alt="Modern data center with server racks" class="rounded-lg shadow-md w-full h-auto" />
+                                        </div>
+                                        <div class="space-y-4">
+                                            <div class="flex items-center space-x-2">
+                                                <i class="fas fa-check-circle text-accent"></i>
+                                                <span class="text-slate-700">99.9% Uptime Guarantee</span>
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <i class="fas fa-check-circle text-accent"></i>
+                                                <span class="text-slate-700">24/7 Expert Support</span>
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <i class="fas fa-check-circle text-accent"></i>
+                                                <span class="text-slate-700">Enterprise Security</span>
+                                            </div>
+                                            <button class="bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                                                Get Started Today
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video Section -->
+                                <div class="bg-white rounded-xl border border-slate-200 p-6">
+                                    <h4 class="text-xl font-semibold text-slate-800 mb-4">See Our Solutions in Action</h4>
+                                    <div class="aspect-video bg-slate-900 rounded-lg relative overflow-hidden">
+                                        <!-- Professional business presentation or tech demo placeholder -->
+                                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=675" alt="Business meeting with technology presentation" class="w-full h-full object-cover" />
+                                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                            <button class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
+                                                <i class="fas fa-play text-2xl text-slate-800 ml-1"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <p class="text-slate-600 mt-4">Watch how our cloud infrastructure scales with your business needs.</p>
+                                </div>
+
+                                <!-- Pricing Table -->
+                                <div class="bg-white rounded-xl border border-slate-200 p-6">
+                                    <h4 class="text-xl font-semibold text-slate-800 mb-6">Pricing Plans</h4>
+                                    <div class="grid md:grid-cols-3 gap-4">
+                                        <div class="border border-slate-200 rounded-lg p-4 text-center">
+                                            <h5 class="font-semibold text-lg text-slate-800">Starter</h5>
+                                            <div class="text-3xl font-bold text-primary my-2">$99<span class="text-lg text-slate-500">/mo</span></div>
+                                            <ul class="text-sm text-slate-600 space-y-2">
+                                                <li>5 GB Storage</li>
+                                                <li>Basic Support</li>
+                                                <li>SSL Certificate</li>
+                                            </ul>
+                                        </div>
+                                        <div class="border-2 border-primary rounded-lg p-4 text-center relative">
+                                            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
+                                                Popular
+                                            </div>
+                                            <h5 class="font-semibold text-lg text-slate-800">Professional</h5>
+                                            <div class="text-3xl font-bold text-primary my-2">$299<span class="text-lg text-slate-500">/mo</span></div>
+                                            <ul class="text-sm text-slate-600 space-y-2">
+                                                <li>50 GB Storage</li>
+                                                <li>Priority Support</li>
+                                                <li>Advanced Security</li>
+                                            </ul>
+                                        </div>
+                                        <div class="border border-slate-200 rounded-lg p-4 text-center">
+                                            <h5 class="font-semibold text-lg text-slate-800">Enterprise</h5>
+                                            <div class="text-3xl font-bold text-primary my-2">$799<span class="text-lg text-slate-500">/mo</span></div>
+                                            <ul class="text-sm text-slate-600 space-y-2">
+                                                <li>Unlimited Storage</li>
+                                                <li>24/7 Dedicated Support</li>
+                                                <li>Custom Integration</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Loading State -->
+                            <div id="loading-state" class="hidden flex items-center justify-center p-12">
+                                <div class="flex items-center space-x-3 text-slate-500">
+                                    <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+                                    <span>AI is generating your response...</span>
+                                </div>
+                            </div>
+
+                            <!-- Empty State -->
+                            <div id="empty-state" class="hidden flex flex-col items-center justify-center p-12 text-center">
+                                <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-4">
+                                    <i class="fas fa-comments text-2xl text-slate-400"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold text-slate-800 mb-2">Start a conversation</h3>
+                                <p class="text-slate-500">Ask me anything about our company, products, or services and I'll provide you with rich, interactive responses.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_COMPONENT: HTMLPreviewArea -->
+
+            <!-- Chat Interface -->
+            <!-- @COMPONENT: ChatInterface -->
+            <div class="w-full lg:w-96 bg-white flex flex-col">
+                <!-- Chat Header -->
+                <div class="border-b border-slate-200 px-6 py-4 bg-slate-50">
+                    <h3 class="text-lg font-semibold text-slate-800">Chat Assistant</h3>
+                    <p class="text-sm text-slate-500">Ask questions to get dynamic responses</p>
+                </div>
+
+                <!-- Chat Messages -->
+                <!-- @STATE: messages:Array = [] -->
+                <div class="flex-1 overflow-auto p-4 space-y-4 min-h-0">
+                    <!-- @MAP: messages.map(message => ( -->
+                    
+                    <!-- AI Message -->
+                    <div class="flex items-start space-x-3" data-mock="true">
+                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-robot text-white text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="bg-slate-100 rounded-lg rounded-tl-none px-4 py-3">
+                                <p class="text-sm text-slate-800">Hello! I'm your AI assistant. I can help you with information about our products and services. Try asking me about our cloud solutions, pricing, or support options!</p>
+                            </div>
+                            <div class="text-xs text-slate-500 mt-1 flex items-center space-x-2">
+                                <span data-bind="message.timestamp">2:30 PM</span>
+                                <span>•</span>
+                                <span class="text-accent">HTML Response Generated</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Message -->
+                    <div class="flex items-start space-x-3 justify-end" data-mock="true">
+                        <div class="flex-1 flex justify-end">
+                            <div class="bg-primary text-white rounded-lg rounded-tr-none px-4 py-3 max-w-xs">
+                                <p class="text-sm">Tell me about your cloud solutions and pricing</p>
+                            </div>
+                        </div>
+                        <div class="w-8 h-8 bg-slate-300 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-user text-slate-600 text-sm"></i>
+                        </div>
+                    </div>
+
+                    <!-- AI Processing Message -->
+                    <div class="flex items-start space-x-3" data-mock="true">
+                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-robot text-white text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="bg-slate-100 rounded-lg rounded-tl-none px-4 py-3">
+                                <p class="text-sm text-slate-800">I've generated a comprehensive response about our cloud solutions and pricing. Check the preview area above to see the interactive content with images, videos, and detailed pricing information!</p>
+                            </div>
+                            <div class="text-xs text-slate-500 mt-1 flex items-center space-x-2">
+                                <span data-bind="message.timestamp">2:34 PM</span>
+                                <span>•</span>
+                                <span class="text-accent">HTML Content Updated</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- @END_MAP )) -->
+                </div>
+
+                <!-- Chat Input -->
+                <!-- @COMPONENT: ChatInput -->
+                <div class="border-t border-slate-200 p-4">
+                    <form class="flex space-x-3" data-event="submit:handleSendMessage">
+                        <!-- @STATE: inputValue:string = "" -->
+                        <input 
+                            type="text" 
+                            placeholder="Ask me anything about our company..."
+                            class="flex-1 border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm"
+                            data-bind="inputValue"
+                            data-mock="true"
+                        />
+                        <button 
+                            type="submit"
+                            class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2 font-medium"
+                            data-event="click:handleSubmit"
+                            data-implementation="Should validate input and trigger AI response generation"
+                        >
+                            <i class="fas fa-paper-plane text-sm"></i>
+                            <span class="hidden sm:inline">Send</span>
+                        </button>
+                    </form>
+                    
+                    <!-- Quick Actions -->
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        <button class="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-full hover:bg-slate-200 transition-colors" data-mock="true">
+                            Product Features
+                        </button>
+                        <button class="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-full hover:bg-slate-200 transition-colors" data-mock="true">
+                            Pricing Plans
+                        </button>
+                        <button class="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-full hover:bg-slate-200 transition-colors" data-mock="true">
+                            Support Options
+                        </button>
+                        <button class="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-full hover:bg-slate-200 transition-colors" data-mock="true">
+                            Contact Sales
+                        </button>
+                    </div>
+
+                    <!-- Input Status -->
+                    <div class="mt-2 flex items-center justify-between text-xs text-slate-500">
+                        <div class="flex items-center space-x-1">
+                            <div class="w-2 h-2 bg-accent rounded-full"></div>
+                            <span>AI Assistant is ready</span>
+                        </div>
+                        <span data-bind="characterCount">0/500</span>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: ChatInput -->
+            </div>
+            <!-- @END_COMPONENT: ChatInterface -->
+        </div>
+    </div>
+    <!-- @END_COMPONENT: MainLayout -->
+
+    <script>
+        // TODO: Implement business logic, API calls, or state management
+        (function() {
+            // Demo functionality for UI interactions
+            const form = document.querySelector('form');
+            const input = document.querySelector('input[type="text"]');
+            const loadingState = document.getElementById('loading-state');
+            const emptyState = document.getElementById('empty-state');
+            const previewContainer = document.getElementById('html-preview-container');
+            
+            // Character counter
+            if (input) {
+                input.addEventListener('input', function() {
+                    const characterCount = document.querySelector('[data-bind="characterCount"]');
+                    if (characterCount) {
+                        characterCount.textContent = `${this.value.length}/500`;
+                    }
+                });
+            }
+
+            // Form submission demo
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Show loading state
+                    const mockContent = previewContainer.querySelector('[data-mock="true"]');
+                    if (mockContent) mockContent.style.display = 'none';
+                    if (emptyState) emptyState.classList.add('hidden');
+                    if (loadingState) loadingState.classList.remove('hidden');
+                    
+                    // Simulate AI response delay
+                    setTimeout(() => {
+                        if (loadingState) loadingState.classList.add('hidden');
+                        if (mockContent) mockContent.style.display = 'block';
+                        
+                        // Clear input
+                        if (input) input.value = '';
+                        
+                        // Update character counter
+                        const characterCount = document.querySelector('[data-bind="characterCount"]');
+                        if (characterCount) characterCount.textContent = '0/500';
+                    }, 2000);
+                });
+            }
+
+            // Quick action buttons
+            const quickButtons = document.querySelectorAll('[data-mock="true"]');
+            quickButtons.forEach(button => {
+                if (button.tagName === 'BUTTON' && button.textContent.trim() !== '') {
+                    button.addEventListener('click', function() {
+                        if (input) {
+                            input.value = `Tell me about ${this.textContent.toLowerCase()}`;
+                            input.focus();
+                        }
+                    });
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

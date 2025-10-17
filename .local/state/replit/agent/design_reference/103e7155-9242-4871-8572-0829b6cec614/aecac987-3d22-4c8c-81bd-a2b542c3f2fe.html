@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot - Dynamic HTML Responses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366F1',
+                        'primary-dark': '#4F46E5',
+                        secondary: '#8B5CF6',
+                        'secondary-light': '#A855F7'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .chat-scroll {
+            scroll-behavior: smooth;
+        }
+        .typing-animation {
+            animation: typing 1.5s infinite;
+        }
+        @keyframes typing {
+            0%, 60%, 100% { opacity: 0.7; }
+            30% { opacity: 1; }
+        }
+        .message-enter {
+            animation: messageSlideIn 0.3s ease-out;
+        }
+        @keyframes messageSlideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- @COMPONENT: ChatContainer [main container with header and chat area] -->
+    <div class="min-h-screen flex flex-col">
+        
+        <!-- Header -->
+        <!-- @COMPONENT: ChatHeader [company branding and status] -->
+        <header class="bg-white border-b border-gray-200 px-4 py-3 shadow-sm">
+            <div class="max-w-4xl mx-auto flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                        <i class="fas fa-robot text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-semibold text-gray-900">TechCorp AI Assistant</h1>
+                        <p class="text-sm text-gray-500 flex items-center">
+                            <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                            Online
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button class="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <!-- @END_COMPONENT: ChatHeader -->
+
+        <!-- Chat Messages Area -->
+        <!-- @COMPONENT: ChatMessagesContainer [scrollable area for conversation history] -->
+        <div class="flex-1 overflow-y-auto chat-scroll pb-24" id="chatContainer">
+            <div class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+                
+                <!-- Welcome Message -->
+                <!-- @COMPONENT: WelcomeMessage [initial greeting with company intro] -->
+                <div class="message-enter">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-robot text-white text-sm"></i>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 max-w-3xl">
+                            <div class="space-y-4">
+                                <h2 class="text-xl font-semibold text-gray-900">Welcome to TechCorp!</h2>
+                                <p class="text-gray-600">I'm your AI assistant, ready to help you explore our products and services through dynamic, rich content. Ask me anything!</p>
+                                
+                                <!-- Company showcase cards -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                    <div class="bg-gradient-to-br from-blue-50 to-indigo-100 p-4 rounded-lg">
+                                        <i class="fas fa-laptop-code text-primary text-2xl mb-2"></i>
+                                        <h3 class="font-medium text-gray-900">Software Solutions</h3>
+                                        <p class="text-sm text-gray-600 mt-1">Enterprise-grade applications</p>
+                                    </div>
+                                    <div class="bg-gradient-to-br from-purple-50 to-pink-100 p-4 rounded-lg">
+                                        <i class="fas fa-cloud text-secondary text-2xl mb-2"></i>
+                                        <h3 class="font-medium text-gray-900">Cloud Services</h3>
+                                        <p class="text-sm text-gray-600 mt-1">Scalable infrastructure</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap gap-2 mt-4">
+                                    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Products</span>
+                                    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Pricing</span>
+                                    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Support</span>
+                                    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Case Studies</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: WelcomeMessage -->
+
+                <!-- User Message Example -->
+                <!-- @COMPONENT: UserMessage [user input bubble] -->
+                <div class="message-enter">
+                    <div class="flex items-start space-x-3 justify-end">
+                        <div class="bg-primary text-white rounded-xl shadow-sm p-4 max-w-xs">
+                            <p>Tell me about your cloud storage solutions</p>
+                        </div>
+                        <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-user text-gray-600 text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: UserMessage -->
+
+                <!-- AI Response with Rich Content -->
+                <!-- @COMPONENT: AIResponseWithMedia [dynamic HTML response with multimedia] -->
+                <div class="message-enter">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-robot text-white text-sm"></i>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 max-w-3xl">
+                            <div class="space-y-6">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-3">TechCorp Cloud Storage Solutions</h3>
+                                    <p class="text-gray-600 mb-4">Our enterprise cloud storage offers unmatched security, scalability, and performance for businesses of all sizes.</p>
+                                </div>
+
+                                <!-- Hero Image -->
+                                <!-- Modern data center with servers and blue lighting -->
+                                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" alt="Modern data center with cloud infrastructure" class="rounded-lg w-full shadow-sm" />
+
+                                <!-- Feature Grid -->
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="text-center p-4 bg-blue-50 rounded-lg">
+                                        <i class="fas fa-shield-alt text-blue-600 text-2xl mb-2"></i>
+                                        <h4 class="font-medium text-gray-900">99.9% Uptime</h4>
+                                        <p class="text-sm text-gray-600 mt-1">Enterprise-grade reliability</p>
+                                    </div>
+                                    <div class="text-center p-4 bg-green-50 rounded-lg">
+                                        <i class="fas fa-lock text-green-600 text-2xl mb-2"></i>
+                                        <h4 class="font-medium text-gray-900">Bank-Level Security</h4>
+                                        <p class="text-sm text-gray-600 mt-1">End-to-end encryption</p>
+                                    </div>
+                                    <div class="text-center p-4 bg-purple-50 rounded-lg">
+                                        <i class="fas fa-expand-arrows-alt text-purple-600 text-2xl mb-2"></i>
+                                        <h4 class="font-medium text-gray-900">Auto-Scaling</h4>
+                                        <p class="text-sm text-gray-600 mt-1">Grows with your needs</p>
+                                    </div>
+                                </div>
+
+                                <!-- Pricing Table -->
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <h4 class="font-medium text-gray-900 mb-3">Storage Plans</h4>
+                                    <div class="space-y-2">
+                                        <div class="flex justify-between items-center py-2">
+                                            <span class="text-gray-700">Starter (1TB)</span>
+                                            <span class="font-medium text-primary">$29/month</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2">
+                                            <span class="text-gray-700">Professional (10TB)</span>
+                                            <span class="font-medium text-primary">$99/month</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2">
+                                            <span class="text-gray-700">Enterprise (100TB)</span>
+                                            <span class="font-medium text-primary">$499/month</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Call to Action -->
+                                <div class="flex flex-col sm:flex-row gap-3">
+                                    <button class="flex-1 bg-primary text-white py-2 px-4 rounded-lg font-medium hover:bg-primary-dark transition-colors">
+                                        Start Free Trial
+                                    </button>
+                                    <button class="flex-1 border border-gray-300 text-gray-700 py-2 px-4 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                                        Request Demo
+                                    </button>
+                                </div>
+
+                                <!-- Additional Info -->
+                                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
+                                    <div class="flex">
+                                        <i class="fas fa-info-circle text-blue-400 mt-0.5 mr-2"></i>
+                                        <p class="text-blue-800 text-sm">
+                                            <strong>Limited Time:</strong> Get 3 months free with any annual plan. Migration assistance included!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: AIResponseWithMedia -->
+
+                <!-- Another User Message -->
+                <!-- @COMPONENT: UserMessage [follow-up question] -->
+                <div class="message-enter">
+                    <div class="flex items-start space-x-3 justify-end">
+                        <div class="bg-primary text-white rounded-xl shadow-sm p-4 max-w-xs">
+                            <p>Can you show me some customer success stories?</p>
+                        </div>
+                        <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-user text-gray-600 text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: UserMessage -->
+
+                <!-- AI Response with Case Studies -->
+                <!-- @COMPONENT: AIResponseCaseStudies [customer testimonials and case studies] -->
+                <div class="message-enter">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-robot text-white text-sm"></i>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 max-w-3xl">
+                            <div class="space-y-6">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-3">Customer Success Stories</h3>
+                                    <p class="text-gray-600">See how leading companies transformed their operations with TechCorp Cloud Storage.</p>
+                                </div>
+
+                                <!-- Case Study Cards -->
+                                <div class="space-y-4">
+                                    <!-- Case Study 1 -->
+                                    <div class="border border-gray-200 rounded-lg p-4">
+                                        <div class="flex items-start space-x-4">
+                                            <!-- Modern office building with glass facade -->
+                                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&h=100" alt="RetailCorp headquarters building" class="w-16 h-16 rounded-lg object-cover" />
+                                            <div class="flex-1">
+                                                <h4 class="font-medium text-gray-900">RetailCorp</h4>
+                                                <p class="text-sm text-gray-500 mb-2">E-commerce • 50,000+ employees</p>
+                                                <p class="text-gray-600 text-sm">"TechCorp's cloud storage helped us reduce infrastructure costs by 60% while improving data access speed for our global teams."</p>
+                                                <div class="mt-2 text-xs text-green-600 font-medium">
+                                                    <i class="fas fa-chart-line mr-1"></i>
+                                                    60% cost reduction
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Case Study 2 -->
+                                    <div class="border border-gray-200 rounded-lg p-4">
+                                        <div class="flex items-start space-x-4">
+                                            <!-- Medical professionals in modern hospital -->
+                                            <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&h=100" alt="HealthTech medical facility" class="w-16 h-16 rounded-lg object-cover" />
+                                            <div class="flex-1">
+                                                <h4 class="font-medium text-gray-900">HealthTech Solutions</h4>
+                                                <p class="text-sm text-gray-500 mb-2">Healthcare • 10,000+ employees</p>
+                                                <p class="text-gray-600 text-sm">"Seamless migration of 500TB of patient data with zero downtime. HIPAA compliance made easy."</p>
+                                                <div class="mt-2 text-xs text-blue-600 font-medium">
+                                                    <i class="fas fa-shield-alt mr-1"></i>
+                                                    100% compliance maintained
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Stats Section -->
+                                <div class="bg-gradient-to-r from-primary to-secondary-light text-white rounded-lg p-6">
+                                    <h4 class="font-semibold mb-4">By the Numbers</h4>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                                        <div>
+                                            <div class="text-2xl font-bold">500+</div>
+                                            <div class="text-sm opacity-90">Enterprise Clients</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-2xl font-bold">99.99%</div>
+                                            <div class="text-sm opacity-90">Uptime SLA</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-2xl font-bold">10PB+</div>
+                                            <div class="text-sm opacity-90">Data Stored</div>
+                                        </div>
+                                        <div>
+                                            <div class="text-2xl font-bold">24/7</div>
+                                            <div class="text-sm opacity-90">Expert Support</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Video Testimonial -->
+                                <div class="bg-gray-100 rounded-lg p-4 text-center">
+                                    <i class="fas fa-play-circle text-4xl text-primary mb-2"></i>
+                                    <p class="text-gray-700 font-medium">Watch Customer Testimonials</p>
+                                    <p class="text-sm text-gray-500">3 min overview of client experiences</p>
+                                    <button class="mt-2 text-primary font-medium text-sm hover:underline">
+                                        Play Video <i class="fas fa-external-link-alt ml-1"></i>
+                                    </button>
+                                </div>
+
+                                <!-- Contact CTA -->
+                                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-lightbulb text-yellow-500 mt-1 mr-3"></i>
+                                        <div>
+                                            <h5 class="font-medium text-gray-900">Ready to transform your business?</h5>
+                                            <p class="text-sm text-gray-600 mt-1">Schedule a personalized demo with our solutions architect.</p>
+                                            <button class="mt-2 bg-primary text-white px-4 py-2 rounded font-medium text-sm hover:bg-primary-dark transition-colors">
+                                                Schedule Demo
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: AIResponseCaseStudies -->
+
+                <!-- Typing Indicator -->
+                <!-- @COMPONENT: TypingIndicator [shows when AI is processing] -->
+                <div class="flex items-start space-x-3" id="typingIndicator" style="display: none;">
+                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-robot text-white text-sm"></i>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-2 h-2 bg-gray-400 rounded-full typing-animation"></div>
+                            <div class="w-2 h-2 bg-gray-400 rounded-full typing-animation" style="animation-delay: 0.2s;"></div>
+                            <div class="w-2 h-2 bg-gray-400 rounded-full typing-animation" style="animation-delay: 0.4s;"></div>
+                            <span class="text-gray-500 text-sm ml-2">AI is crafting your response...</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: TypingIndicator -->
+
+            </div>
+        </div>
+        <!-- @END_COMPONENT: ChatMessagesContainer -->
+
+        <!-- Fixed Chat Input -->
+        <!-- @COMPONENT: ChatInput [fixed bottom input with send functionality] -->
+        <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
+            <div class="max-w-4xl mx-auto p-4">
+                <div class="flex items-end space-x-3">
+                    <div class="flex-1 relative">
+                        <textarea 
+                            data-bind="userInput"
+                            data-event="keydown:handleKeyDown,input:handleInput"
+                            class="w-full resize-none border border-gray-300 rounded-xl px-4 py-3 pr-12 focus:ring-2 focus:ring-primary focus:border-transparent max-h-32 min-h-[48px]" 
+                            placeholder="Ask me anything about our products and services..."
+                            rows="1"
+                            id="messageInput"
+                        ></textarea>
+                        <!-- @FUNCTIONALITY: Auto-resize textarea based on content, max 4 lines -->
+                        <button 
+                            data-event="click:handleSend"
+                            data-implementation="Should validate input and send message"
+                            class="absolute right-2 bottom-2 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            id="sendButton"
+                        >
+                            <i class="fas fa-paper-plane text-sm"></i>
+                        </button>
+                    </div>
+                    <button class="p-3 text-gray-500 hover:text-gray-700 rounded-xl hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button class="p-3 text-gray-500 hover:text-gray-700 rounded-xl hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between mt-2 text-xs text-gray-500">
+                    <span>Press Enter to send, Shift+Enter for new line</span>
+                    <span data-bind="characterCount">0/2000</span>
+                </div>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: ChatInput -->
+
+    </div>
+    <!-- @END_COMPONENT: ChatContainer -->
+
+    <script>
+        (function() {
+            // DOM elements
+            const messageInput = document.getElementById('messageInput');
+            const sendButton = document.getElementById('sendButton');
+            const chatContainer = document.getElementById('chatContainer');
+            const typingIndicator = document.getElementById('typingIndicator');
+
+            // TODO: Implement business logic for AI service integration
+            // TODO: Add HTML sanitization for security
+            // TODO: Implement real-time message handling
+            // TODO: Add conversation persistence
+
+            // Auto-resize textarea
+            function autoResize() {
+                messageInput.style.height = 'auto';
+                messageInput.style.height = Math.min(messageInput.scrollHeight, 128) + 'px';
+            }
+
+            // Handle input events
+            messageInput.addEventListener('input', function() {
+                autoResize();
+                // TODO: Update character count
+                // TODO: Enable/disable send button based on content
+            });
+
+            // Handle keyboard shortcuts
+            messageInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            // Send message function
+            function sendMessage() {
+                const message = messageInput.value.trim();
+                if (!message) return;
+
+                // TODO: Add user message to chat
+                // TODO: Show typing indicator
+                // TODO: Call AI service for HTML response
+                // TODO: Render AI response with proper sanitization
+                // TODO: Auto-scroll to latest message
+
+                messageInput.value = '';
+                autoResize();
+            }
+
+            // Send button click
+            sendButton.addEventListener('click', sendMessage);
+
+            // Smooth scroll to bottom
+            function scrollToBottom() {
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+
+            // Initialize
+            autoResize();
+            scrollToBottom();
+
+            // TODO: Implement WebSocket connection for real-time updates
+            // TODO: Add error handling for failed AI responses
+            // TODO: Implement conversation export functionality
+            // TODO: Add dark mode toggle
+        })();
+    </script>
+</body>
+</html>
